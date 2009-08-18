@@ -98,7 +98,7 @@ while($row=$db->f()){
 jQuery(function($){
   $.scrollTo(0);
 
-  $('body').append("<img id='dfhu_dot' style='position:absolute;top:0;left:0;z-index:80' src='http://site/scrollingheatmap/dot.png'>");
+  $('body').append("<img id='dfhu_dot' style='position:absolute;top:0;left:0;z-index:80' src='../ft_server/dot.png'>");
   
 <?php
   print_js_array("scrollMotion",$scrolls);
@@ -121,7 +121,7 @@ jQuery(function($){
                      ";top:" +  
                      pos[1] + "px" +
                      ";z-index:79'" +
-                     " src='http://site/scrollingheatmap/cdot.png'>");
+                     " src='../ft_server/cdot.png'>");
   }
 
   function moveMouse(pos){
