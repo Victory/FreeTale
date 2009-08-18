@@ -13,9 +13,6 @@
 
   This file is great.
 
-$Date::                      $:
-$Rev::                       $:
-
 */
 
 require("./login_is.php");

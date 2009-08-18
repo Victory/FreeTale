@@ -13,9 +13,6 @@
 
   The Cofiguration File
 
-$Date:: 2009-08-17 23:25:16 #$:
-$Rev:: 7                     $:
-
 */
 
 date_default_timezone_set('Europe/London');

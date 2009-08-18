@@ -1,5 +1,4 @@
 <?php
-
 /*
 
 @author: Victory
@@ -7,27 +6,19 @@
 @copyright: dfhu.org
 @report_bugs: bugs(at)dfhu.org
 @feature_request: features(at)dfhu.org
-@file: scrollingheatmap/includes/db.inc.php
+@file: 
 @license: BSD
 
 @description:
 
   This file is great.
 
-$Date:: 2009-08-16 07:14:40 #$:
-$Rev:: 6                     $:
-
 */
-
-
-
 class DB{
   /**
      Wrapper class for sqlite and mysql
      Author: Victory
-     Version: 0.01 (unstable)
-
-
+     Version: 0.05 (unstable)
 
      @var PDO::Connection $this->c is the connection
      @var string $this->e is the engine

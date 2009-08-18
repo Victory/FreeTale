@@ -1,8 +1,6 @@
 <?php
 
-
 /*
-
 @author: Victory
 @site: http://dfhu.org
 @copyright: dfhu.org
@@ -14,9 +12,6 @@
 @description:
 
   This file is great.
-
-$Date::                      $:
-$Rev::                       $:
 
 */
 
@@ -57,32 +52,8 @@ $_SESSION['db']=$_GET['db'];
 <html>
 
 <head>
-<title>Best Website in The World</title>
-<link rel="stylesheet" href="style.css" >
+<title>FreeTale Replay</title>
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
-
-
-    <script type="text/javascript" src="../js/jquery-1.3.2.min.js"></script>
-    <script type="text/javascript" src="../js/dimensions.js"></script>
-    <script type="text/javascript" src="../js/urlencode.js"></script>
-    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
-    
-<!--
-<script type="text/javascript" src="../js/dfhu_iseeyou.js"></script>
--->
-
-<script type="text/javascript">
-  var dfhu_iseeyou_replay=1;
-  jQuery(function($){
-      
-  });
-
-function dfhuReplay(){
-  return true;
-}
-</script>
-
-
 
 <meta name="description" content="" >
 <meta name="keywords" content="" >

@@ -1,5 +1,4 @@
 <?php
-
 /*
 
 @author: Victory
@@ -7,15 +6,12 @@
 @copyright: dfhu.org
 @report_bugs: bugs(at)dfhu.org
 @feature_request: features(at)dfhu.org
-@file: scrollingheatmap/iseeyou_parse_log.php
+@file: 
 @license: BSD
 
 @description:
 
   This file is great.
-
-$Date:: 2009-08-16 07:14:40 #$:
-$Rev:: 6                     $:
 
 */
 

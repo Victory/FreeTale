@@ -13,9 +13,6 @@
 
   This file is great.
 
-$Date:: 2009-08-18 02:27:40 #$:
-$Rev:: 8                     $:
-
 */
 //saves ip address and timestamp
 

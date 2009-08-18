@@ -5,15 +5,12 @@
 @copyright: dfhu.org
 @report_bugs: bugs(at)dfhu.org
 @feature_request: features(at)dfhu.org
-@file:
+@file: 
 @license: BSD
 
 @description:
 
   This file is great.
-
-$Date:: 2009-08-18 02:27:40 #$:
-$Rev:: 8                     $:
 
 */
 
