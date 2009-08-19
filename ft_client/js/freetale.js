@@ -40,7 +40,7 @@ jQuery(function($){
   });
 
   // store scroll events
-  $(document).scroll(function(e){
+  $(window).scroll(function(e){
     scrollMotion[scrollMotion.length] =
       lowestVisible();
   });

@@ -18,14 +18,6 @@ jQuery(function($){
     return id;
   }
   function getName(o){
-    
-   /*
-    
-   TODO: deal with foo[] type names, maybe by replaing '[' and ']'
-   with like '||' and '|||'
-
-   */
-
     return o.attr("name");
   }
 
@@ -88,10 +80,9 @@ jQuery(function($){
   function getKeyQuery(actionType,actionObject){
     var val= "";
     for(name in actionObject){
-      val= val + "&" + 
-	actionType + 
-	"[" + urlencode(name) + "]=" +
-	urlencode(actionObject[name]);
+      val= val + "&k[]=" + 
+	urlencode(name) + "::" +
+        urlencode(actionObject[name]);
     }
     return val;
   }
@@ -112,65 +103,82 @@ jQuery(function($){
   }
 
 
-  function timeAction(elements){
+
+  function inputFocus(){
+    if(!isClocking())
+      return;
+    startClocking();
+  }
+
+  function inputBlur(){
+    if(!isClocking())
+      return;
+    blur[blur.length]=getClockString($(this));
+    
+    $('body').append("blur - " + getClockString($(this)) + "<br>");
+    
+    // send for the form_gif.php
+    // TODO: need to fix this for textarea
+    storeActions($(this).attr('type'));
+     
+
+    
+
+  }
+
+  function inputKeyup(){
+
+    // If we haven't started clocking then ...
+    if(!isClocking())
+      // ... its about time we start
+      startClocking();
+    
+    // the JSON object uses the name to refrence.
+    var name=$(this).attr('name');
+    
+    // a rose by any other name is still a rose, but a rose with
+    // an undefined name is a no good, dirty tramp.
+    if(typeof(name) == 'undefined')
+      return;
+    
+    // record the keyup event (just a counter)
+    updateKeyupCount(name);
+    
+    //$('body').append(getKeyupCountString(name) + "<br>");
+    
+  }
+
+  function bindActions(elements){
     for(ii in elements){
 
+      // We just brute force unbind all the elements, so we dont'
+      // windup doing multiple binds. Yes we call bindActions after
+      // every call to storeActions. Why? Well, because if your web
+      // 2.0 deally ads new elements to the form on some action like
+      // "choose state->choose town" then we need to pick up the new
+      // elements too.
+      $(elements[ii]).unbind('focus',inputFocus);
+      $(elements[ii]).unbind('blur',inputBlur);
+      $(elements[ii]).unbind('keyup',inputKeyup);
+
+      // on focus we (re)start the clock, read the keyup comment too.
       $(elements[ii]).
-	bind('focus',function(){
-	  if(!isClocking())
-	    return;
-	  startClocking();
+	bind('focus',inputFocus);
 
-	  //focus[focus.length] = getClockString($(this));
-	  //$('body').append("focus - " + getClockString($(this)) + "<br>");
-	});
+      // when we blur we do a storeActions.
       $(elements[ii]).
-	bind('blur',function(){
-	  if(!isClocking())
-	    return;
-	  blur[blur.length]=getClockString($(this));
-	  // send for the form_gif.php, the 'false' indicates that
-	  // this is not a submit;
-	  
-	  $('body').append("blur - " + getClockString($(this)) + "<br>");
-	  storeActions(false);
-
-	});
-
+	bind('blur',inputBlur);
 
       // We record the number of keyup events, for each named
       // input/textarea on the page. Recoding of form action only
       // starts when a named input starts getting input. We use this
       // istead of the first on focus because, sometimes forms get
-      // focus before the user is ready to fill out the form.
+      // focus before the user is ready to fill them out.
       $(elements[ii]).
-	bind('keyup',function(e){
-	  
-
-	  // If we haven't started clocking then ...
-	  if(!isClocking())
-	    // ... its about time we start
-	    startClocking();
-
-
-	  // the JSON object uses the name to refrence.
-	  var name=$(this).attr('name');
-
-	  // a rose by any other name is still a rose, but a rose with
-	  // an undefined name is a no good, dirty tramp.
-	  if(typeof(name) == 'undefined')
-	    return;
-
-	  // record the keyup event (just a counter)
-	  updateKeyupCount(name);
-
-	  //$('body').append(getKeyupCountString(name) + "<br>");
-	  
-	});
+	bind('keyup',inputKeyup);
 
     }
   }// timeIt
-
 
   function storeActions(isSubmit){
     
@@ -179,40 +187,46 @@ jQuery(function($){
     
     var gifLocation=form_gif_location+q;
 
-    //var formGif=new Image();
-    //formGif.src = gifLocation;
+    var formGif=new Image();
+    formGif.src = gifLocation;
 
-    //$('body').append("<br>" + gifLocation + "<br>");
+    $('body').append("<br>" + gifLocation + "<br>");
     
     focus=new Array();
     blur=new Array();
     keyupCount={};
 
+    /*
 
+    we rebind, incase the users action results in new form elements
+    being added. Like if the selected "state" and so now there is a
+    "city" form.
+ 
+   */
+    bindActions(actionElements);
   }
-
 
   $(document).bind("submit",function(){
     var id=$(this).attr('id');
-
-    storeActions(true);
-
-    //alert(getFormActionQuery());
-    
-    return false;
+    storeActions('submit');    
+    //return false;
   });
-
-
   
   var actionElements=
     new Array(
       "textarea",
+      "select",
       "input[type='text']",  
       "input[type='password']",
       "input[type='file']",
       "input[type='radio']",
       "input[type='checkbox']");
 
-  timeAction(actionElements);
+  bindActions(actionElements);
+
+  // we start off with a faux blur just to say, "hey! i landed." I
+  // thought of the idea while standing in baggage reclaim.
+  blur[0]="landing";
+  storeActions('landing');
 
 });
