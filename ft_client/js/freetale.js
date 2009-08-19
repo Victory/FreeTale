@@ -12,6 +12,10 @@
 
   This file is great.
 
+TODO: Remove mention of iseeyou the lame first name, its should be
+called freetale
+
+
 */
 
 jQuery(function($){
@@ -26,6 +30,8 @@ jQuery(function($){
   scrollMotion[0] = lowestVisible();
   var mouseMotion = new Array();
   var mouseClicks = new Array();
+
+  var freetaleCookieName='freetale_id';
 
   // store mouse movements
   $(document).mousemove(function(e){
@@ -86,13 +92,13 @@ jQuery(function($){
    
     var val="";
     // iterate over all the vals and ...
-    for(i in vals){
+    for(ii in vals){
       // ... if we are on step'th value, then ..
-      if( i % step == 0){
+      if( ii % step == 0){
 	// ... append the &foo[]=123 type string
 	val=val + "&" +
 	  queryName + "[]=" +
-	  vals[i];
+	  vals[ii];
       }
     }
 
@@ -117,7 +123,7 @@ jQuery(function($){
     var q;
 
     q="?" + 
-      "i=" + $.cookie("dfhu_iseeyou") +
+      "i=" + $.cookie(freetaleCookieName) +
       "&r=" + urlencode(document.referrer) +
       "&l=" + urlencode(window.location) +
       "&w=" + windowWidth +
@@ -163,22 +169,21 @@ jQuery(function($){
 
   function cookieCheck(){
     
-    var cookieName='dfhu_iseeyou';
-
+    
     // Session if, user
-    var iseeyou_id;
-    if(iseeyou_id=$.cookie(cookieName)){
-      //alert(iseeyou_id);
+    var freetale_id;
+    if(freetale_id=$.cookie(freetaleCookieName)){
+      //alert(freetale_id);
 
-      var tail=iseeyou_id
-	.substring(iseeyou_id.length-1,iseeyou_id.length)*1;
+      var tail=freetale_id
+	.substring(freetale_id.length-1,freetale_id.length)*1;
       tail=tail+1;
-      iseeyou_id=
-	iseeyou_id.substring(0,
-			     iseeyou_id.length-1) +
+      freetale_id=
+	freetale_id.substring(0,
+			     freetale_id.length-1) +
 	+ tail;
-      $.cookie(cookieName,
-	       iseeyou_id, 
+      $.cookie(freetaleCookieName,
+	       freetale_id, 
 	       {expires: 7});
       return;
     }
@@ -186,7 +191,7 @@ jQuery(function($){
     var rndId=
       Math.floor(999999*Math.random());
     
-    $.cookie(cookieName,
+    $.cookie(freetaleCookieName,
 	     rndId + "_1", 
 	     {expires: 7});
     
