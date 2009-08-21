@@ -1,9 +1,27 @@
 jQuery(function($){
 
-  var focus=new Array();
-  var blur=new Array();
-  var keyupCount={};
-  var freetaleCookieName='freetale_id';
+
+  var blur="";
+  var keyupCount=0;
+  var freetaleCookieName='freetaleform_id';
+
+  function cookieCheck(){
+
+    // if we already have a cookie, just use it
+    if(freetale_id=$.cookie(freetaleCookieName)){
+      return;
+    }
+    // other wise we generate one
+    var rndId=
+      Math.floor(999999*Math.random());
+    
+    $.cookie(freetaleCookieName,
+	     rndId + "_1", 
+	     {expires: 7});
+    
+  };
+  cookieCheck();
+
 
   function now(){
     var now=new Date().getTime();
@@ -43,47 +61,31 @@ jQuery(function($){
 
        @param $(this) thisObject - element in a form
 
-       @return string - something slike focus::theform::email::30
+       @return string - something slike theform||firstname||30
     */
     return getParentFormId(thisObject) +
-      "::" +
+      "||" +
       getName(thisObject) +
-      "::" +
+      "||" +
       getElapsedTime();
   }
 
   function updateKeyupCount(name){
-    if(typeof(keyupCount[name]) == 'undefined')
-      keyupCount[name]=0;
-    else
-      keyupCount[name]=keyupCount[name]+1;
+      keyupCount=keyupCount+1;
   }
 
-  function getKeyupCountString(name){
-    return name + "::" + keyupCount[name];
+  function getKeyupCountString(){
+    return keyupCount;
   }
 
-  function getActionQuery(actionType,actionArray){
-    var val = "";
-    for(ii in actionArray){
-      val = val + "&" +
-	actionType + "[]=" +
-	urlencode(actionArray[ii]);
-    }
+  function getBlurQuery(blur){
+    var bits=blur.split("||");
 
-    if(val == ""){
-      val="&" + actionType + "[]=";
-    }
-    return val;
-  }
-
-  function getKeyQuery(actionType,actionObject){
-    var val= "";
-    for(name in actionObject){
-      val= val + "&k[]=" + 
-	urlencode(name) + "::" +
-        urlencode(actionObject[name]);
-    }
+    var val = 
+      "&f=" + bits[0] +
+      "&n=" + bits[1] +
+      "&t=" + bits[2];
+    
     return val;
   }
 
@@ -95,14 +97,11 @@ jQuery(function($){
       "&r=" + urlencode(document.referrer) +
       "&l=" + urlencode(window.location) +
       "&s=" + isSubmit +
-      getActionQuery('b',blur) +
-      //getActionQuery('f',focus) +
-      getKeyQuery('k',keyupCount)
+      getBlurQuery(blur) +
+      "&k=" + keyupCount;
 
     return q;
   }
-
-
 
   function inputFocus(){
     if(!isClocking())
@@ -113,16 +112,13 @@ jQuery(function($){
   function inputBlur(){
     if(!isClocking())
       return;
-    blur[blur.length]=getClockString($(this));
+    blur=getClockString($(this));
     
     $('body').append("blur - " + getClockString($(this)) + "<br>");
     
     // send for the form_gif.php
     // TODO: need to fix this for textarea
     storeActions($(this).attr('type'));
-     
-
-    
 
   }
 
@@ -192,15 +188,14 @@ jQuery(function($){
 
     $('body').append("<br>" + gifLocation + "<br>");
     
-    focus=new Array();
     blur=new Array();
-    keyupCount={};
+    keyupCount=0;
 
-    /*
+    /* 
 
-    we rebind, incase the users action results in new form elements
-    being added. Like if the selected "state" and so now there is a
-    "city" form.
+    We rebind, incase the users action results in new form elements
+    being added. Like if the user selected "state" and so now there is
+    a "city" element.
  
    */
     bindActions(actionElements);
@@ -211,6 +206,7 @@ jQuery(function($){
     storeActions('submit');    
     //return false;
   });
+
   
   var actionElements=
     new Array(
@@ -226,7 +222,6 @@ jQuery(function($){
 
   // we start off with a faux blur just to say, "hey! i landed." I
   // thought of the idea while standing in baggage reclaim.
-  blur[0]="landing";
   storeActions('landing');
 
 });

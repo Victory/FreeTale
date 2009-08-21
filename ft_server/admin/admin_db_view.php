@@ -31,7 +31,7 @@ $db=new DBx(DB_DIR . $_GET['db']);
 
 $sql="
 SELECT id,url FROM tics 
- GROUP BY url
+ GROUP BY id
 ";
 
 $db->q($sql);

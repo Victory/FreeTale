@@ -16,7 +16,8 @@
 */
 //saves ip address and timestamp
 
-$database_file="db/" . date("ymd") . "-dfhu_iseeyou.log";
+
+$database_file="db/" . date("ymd") . "-{$_SERVER['HTTP_HOST']}-freetale.log";
 
 //TODO, Bunch of filters, turn off error reporting etc
 

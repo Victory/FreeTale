@@ -17,7 +17,6 @@ called freetale
 
 
 */
-
 jQuery(function($){
 
   // do not record if we are in an iframe
@@ -168,20 +167,17 @@ jQuery(function($){
 
 
   function cookieCheck(){
-    
-    
+      
     // Session if, user
     var freetale_id;
     if(freetale_id=$.cookie(freetaleCookieName)){
       //alert(freetale_id);
 
-      var tail=freetale_id
-	.substring(freetale_id.length-1,freetale_id.length)*1;
-      tail=tail+1;
-      freetale_id=
-	freetale_id.substring(0,
-			     freetale_id.length-1) +
-	+ tail;
+      var bits=freetale_id.split("_");
+      var tail=parseInt(bits[1])+1;
+
+      freetale_id=bits[0] + "_" + tail;
+
       $.cookie(freetaleCookieName,
 	       freetale_id, 
 	       {expires: 7});
@@ -195,14 +191,26 @@ jQuery(function($){
 	     rndId + "_1", 
 	     {expires: 7});
     
-  }
-
+  };
   cookieCheck();
 
   /**/
   window.setInterval(recordMotion,
 		     500);
   /**/
+
+
+  /***************************************
+
+   
+   Begin logic for form analytics
+
+   TODO: merg that code here
+
+  ****************************************/
+
+
+
 
 
 });
