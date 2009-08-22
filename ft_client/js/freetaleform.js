@@ -84,19 +84,19 @@ jQuery(function($){
     var val = 
       "&f=" + bits[0] +
       "&n=" + bits[1] +
-      "&t=" + bits[2];
+      "&c=" + bits[2];
     
     return val;
   }
 
-  function getFormActionQuery(isSubmit){
+  function getFormActionQuery(inputType){
     var q;
 
     q="?" +
       "i=" + $.cookie(freetaleCookieName) +
       "&r=" + urlencode(document.referrer) +
       "&l=" + urlencode(window.location) +
-      "&s=" + isSubmit +
+      "&t=" + inputType +
       getBlurQuery(blur) +
       "&k=" + keyupCount;
 

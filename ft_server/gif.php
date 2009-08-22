@@ -17,7 +17,6 @@
 //saves ip address and timestamp
 
 
-$database_file="db/" . date("ymd") . "-{$_SERVER['HTTP_HOST']}-freetale.log";
 
 //TODO, Bunch of filters, turn off error reporting etc
 
@@ -54,6 +53,13 @@ function check_motion($vals){
 check_motion($_GET['c']);
 check_motion($_GET['m']);
 */
+
+$url_bits=parse_url($_GET['l']);
+
+$database_file=
+  "db/" . 
+  date("ymd") . 
+  "-{$url_bits['host']}-freetale.log";
 
 $str=@date("U") . 
   "\t" . $_SERVER['REMOTE_ADDR'] .

@@ -28,12 +28,22 @@ define("DB_ENGINE","sqlite");
 define("TOKEN_SALT","something random 8484");
 
 /* Smile, You are Done Editing */
+
+
 global $tic_vars;
 // the order of the tab separated log files
-$tic_vars=Array('unixtime','remote_addr','id',
-                'url','referer','width','height',
-                'time_elapsed','clicks','mouse_movements',
-                'scroll');
+$tic_vars=
+  Array('unixtime','remote_addr','id',
+	'url','referer','width','height',
+	'time_elapsed','clicks','mouse_movements',
+	'scroll');
+
+global $form_action_vars;
+$form_action_vars=
+  Array('unixtime','remote_addr','id',
+	'url','referer','input_type',
+	'form_id','input_name',
+	'time_elapsed','key_ups');
 
 // if the Basedir Path is not set ...
 if(!defined("PATH_BASE")){

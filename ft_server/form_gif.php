@@ -16,35 +16,28 @@
 */
 
 
-
-/**/
+/** /
 echo "<pre>";
 print_r($_GET);
 echo "</pre>";
 exit;
 /**/
 
-
-
-$database_file=
-  "db/" . 
-  date("ymd") . 
-  "-{$_SERVER['HTTP_HOST']}-freetaleform.log";
-
 //TODO: Add filters 
 
+/*
 $filters=
   Array(
-	'l'=>FILTER_VALIDATE_URL,
-	'r'=>FILTER_VALIDATE_URL,
-	'w'=>FILTER_VALIDATE_INT,
-	'h'=>FILTER_VALIDATE_INT,
-	'k'=>FILTER_VALIDATE_INT
-	);
+        'l'=>FILTER_VALIDATE_URL,
+        'r'=>FILTER_VALIDATE_URL,
+        'w'=>FILTER_VALIDATE_INT,
+        'h'=>FILTER_VALIDATE_INT,
+        'k'=>FILTER_VALIDATE_INT
+        );
 filter_var_array($_GET,$filters);
 
 if(!preg_match("/^[0-9]+_[0-9]+$/",
-	       $_GET['i'])){
+               $_GET['i'])){
   gif();
 }
 
@@ -56,19 +49,28 @@ $_GET['b']=trim($_GET['b']);
 if(preg_match("/[\s<>\"\']/",$_GET['b'])){
   gif();
 }
+*/
 
+
+$url_bits=parse_url($_GET['l']);
+
+$database_file=
+  "db/" . 
+  date("ymd") . 
+  "-{$url_bits['host']}-freetaleform.log";
 
 $str=@date("U") . 
   "\t" . $_SERVER['REMOTE_ADDR'] .
-  "\t" . $_GET['i'] . 
-  "\t" . $_GET['l'] .
-  "\t" . $_GET['r'] .
-  "\t" . $_GET['b'] .
-  "\t" . $_GET['k'] .
+  "\t" . $_GET['i'] . // user id
+  "\t" . $_GET['l'] . // current page
+  "\t" . $_GET['r'] . // referer
+  "\t" . $_GET['t'] . // type of form (text,password,option,etc..)
+  "\t" . $_GET['f'] . // the form's id
+  "\t" . $_GET['n'] . // the name of the input
+  "\t" . $_GET['c'] . // the 'clock' time spent on the input
+  "\t" . $_GET['k'] . // number of keyup events
   "\n";
-
 file_put_contents($database_file, $str, FILE_APPEND);
-
 
 function gif(){
   header("content-type: image/gif");
@@ -76,11 +78,8 @@ function gif(){
   
   echo 
     base64_decode("R0lGODlhAQABAIAAAAAAAAAAACH5B" .
-		  "AEAAAAALAAAAAABAAEAAAICRAEAOw==");
+                  "AEAAAAALAAAAAABAAEAAAICRAEAOw==");
   exit;
 }
 gif();
-
-
-
 ?>

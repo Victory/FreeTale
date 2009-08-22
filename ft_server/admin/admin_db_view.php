@@ -19,7 +19,7 @@ require("./login_is.php");
 require("../includes/db.inc.php");
 $db_dir=DB_DIR;
 
-if(!preg_match("/[0-9]{6}-dfhu_iseeyou.sqlite/",
+if(!preg_match("/freetale(form).sqlite$/",
 	       $_GET['db'])){
 
   echo "BAD DATABSE";

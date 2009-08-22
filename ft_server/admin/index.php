@@ -27,12 +27,21 @@ while (false !== ($entry = $d->read())) {
      $entry == "auth.sqlite")
     continue;
   $db_name="$db_dir$entry";
-  echo "<a href=\"admin_db_view.php?db=$entry\">$entry</a><br>";
+
+  // if this is an "action" db then ...
+  if(preg_match("/freetale.sqlite$/",$entry)){
+    // ... link to the replayer
+    echo "<a href=\"admin_db_view.php?db=$entry\">$entry</a><br>";
+  }
+
+  // If this is a "form" db then ...
+  if(preg_match("/freetaleform.sqlite$/",$entry)){    
+    // ... link to the form displayer
+    echo "<a href=\"admin_db_view.php?db=$entry\">$entry</a><br>";
+  }
 }
 
 ?>
-
-
 <p>
 <a href="./login_out.php">logout</a>
 </p>
