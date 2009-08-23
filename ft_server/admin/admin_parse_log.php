@@ -15,7 +15,6 @@
 
 */
 
-
 function parse_tic($tic_string){
 
   // the tab delimited log file is in the following order, one row
@@ -53,6 +52,7 @@ function parse_motion_file($log_file_name){
 CREATE TABLE tics (
   unixtime INT NOT NULL,
   remote_addr CHAR(30),
+  user_agent TEXT,
   id INT,
   url TEXT NOT NULL,
   referer TEXT,
@@ -133,6 +133,7 @@ function parse_form_file($log_file_name){
 CREATE TABLE actions (
   unixtime INT NOT NULL,
   remote_addr CHAR(30),
+  user_agent TEXT,
   id INT,
   url TEXT NOT NULL,
   referer TEXT,
@@ -164,7 +165,7 @@ CREATE INDEX IF NOT EXISTS
     $db->set('actions',$tic);
 
     // todo add cleanup string
-    /**/
+    /** /
     echo "<pre>";
     print_r($tic);
     echo "</pre>";

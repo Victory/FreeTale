@@ -37,7 +37,8 @@ while (false !== ($entry = $d->read())) {
   // If this is a "form" db then ...
   if(preg_match("/freetaleform.sqlite$/",$entry)){    
     // ... link to the form displayer
-    echo "<a href=\"admin_db_view.php?db=$entry\">$entry</a><br>";
+    echo "<a href=\"admin_db_view.php?db=$entry\">$entry</a>
+    ";
   }
 }
 

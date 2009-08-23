@@ -59,8 +59,11 @@ $database_file=
   date("ymd") . 
   "-{$url_bits['host']}-freetaleform.log";
 
+$ua=preg_replace("/\t<>/","_",$_SERVER['HTTP_USER_AGENT']);
+
 $str=@date("U") . 
   "\t" . $_SERVER['REMOTE_ADDR'] .
+  "\t" . $ua .
   "\t" . $_GET['i'] . // user id
   "\t" . $_GET['l'] . // current page
   "\t" . $_GET['r'] . // referer

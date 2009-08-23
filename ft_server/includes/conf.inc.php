@@ -40,8 +40,8 @@ $tic_vars=
 
 global $form_action_vars;
 $form_action_vars=
-  Array('unixtime','remote_addr','id',
-	'url','referer','input_type',
+  Array('unixtime','remote_addr','user_agent',
+	'id','url','referer','input_type',
 	'form_id','input_name',
 	'time_elapsed','key_ups');
 
