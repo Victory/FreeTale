@@ -82,8 +82,8 @@ jQuery(function($){
     var bits=blur.split("||");
 
     var val = 
-      "&f=" + bits[0] +
-      "&n=" + bits[1] +
+      "&f=" + urlencode(bits[0]) +
+      "&n=" + urlencode(bits[1]) +
       "&c=" + bits[2];
     
     return val;
@@ -176,9 +176,9 @@ jQuery(function($){
     }
   }// timeIt
 
-  function storeActions(isSubmit){
+  function storeActions(inputType){
     
-    var q=getFormActionQuery(isSubmit);
+    var q=getFormActionQuery(inputType);
     form_gif_location="http://site/FreeTale/ft_server/form_gif.php" 
     
     var gifLocation=form_gif_location+q;
@@ -201,12 +201,23 @@ jQuery(function($){
     bindActions(actionElements);
   }
 
-  $(document).bind("submit",function(){
-    var id=$(this).attr('id');
-    storeActions('submit');    
-    //return false;
-  });
+  
+  $("form").bind("submit",function(){
+    var form_id=$(this).attr("id");
+    var submit_name=
+      $("[input[type='submit']",this)
+      .attr("value");
 
+    blur=urlencode(form_id) + 
+      "||" + 
+      urlencode(submit_name) + 
+      "||0";
+    //inputBlur();
+    storeActions('submit');    
+  });
+ 
+	  
+  
   
   var actionElements=
     new Array(
