@@ -61,6 +61,7 @@ CREATE TABLE tics (
 
   width INT CHECK(width < 4000),
   height INT CHECK(height < 4000),
+  body_height INT CHECK(body_height < 10000),
   time_elapsed INT,
   clicks TEXT,
   mouse_movements TEXT,

@@ -18,6 +18,7 @@ called freetale
 
 */
 jQuery(function($){
+  //alert($(document.body).height());
 
   // do not record if we are in an iframe
   if(window.top != window){
@@ -119,6 +120,7 @@ jQuery(function($){
     var windowWidth = $(window).width();
     var windowHeight = $(window).height();
     var elapsedTime = now() - tic;
+    var bodyHeight = $(document.body).height();
     var q;
 
     q="?" + 
@@ -127,6 +129,7 @@ jQuery(function($){
       "&l=" + urlencode(window.location) +
       "&w=" + windowWidth +
       "&h=" + windowHeight +
+      "&b=" + bodyHeight +
       "&t=" + elapsedTime +
       conciseQuery("c",mouseClicks,maxLength) +
       conciseQuery("m",mouseMotion,maxLength) +

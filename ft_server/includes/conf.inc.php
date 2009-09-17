@@ -34,7 +34,7 @@ global $tic_vars;
 // the order of the tab separated log files
 $tic_vars=
   Array('unixtime','remote_addr','id',
-	'url','referer','width','height',
+	'url','referer','width','height','body_height',
 	'time_elapsed','clicks','mouse_movements',
 	'scroll');
 

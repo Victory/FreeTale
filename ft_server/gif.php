@@ -68,6 +68,7 @@ $str=@date("U") .
   "\t" . $_GET['r'] .
   "\t" . $_GET['w'] . 
   "\t" . $_GET['h'] .
+  "\t" . $_GET['b'] .
   "\t" . $_GET['t'] .
   "\t" . implode("|",$_GET['c']) .
   "\t" . implode("|",$_GET['m']) .
