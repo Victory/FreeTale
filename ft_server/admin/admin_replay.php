@@ -44,6 +44,8 @@ $init=$db->f();
 $_SESSION['id']=$_GET['id'];
 $_SESSION['url']=$_GET['url'];
 $_SESSION['db']=$_GET['db'];
+$_SESSION['replay_motion']=1;
+$_SESSION['replay_summary']=0;
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"

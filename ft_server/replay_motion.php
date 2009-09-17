@@ -1,12 +1,8 @@
 <?php
-header("Content-type: text/javascript");
-session_start();
-if(!isset($_SESSION['logged_in']) or
-   $_SESSION['logged_in'] != "true"){
-  //echo 'var dfhu_iseeyou_replay=true;';
-  exit;
-}// not logged in
-echo 'var dfhu_iseeyou_replay=0;';
+
+echo '
+var freeTale_replay=0;
+';
 
 require('./includes/db.inc.php');
 
