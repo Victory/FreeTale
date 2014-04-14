@@ -1,0 +1,6 @@
+*.swp
+/backups
+/config/config.js
+/node_modules
+/GeoLiteCity.dat
+/data/*.json
